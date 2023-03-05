@@ -1,24 +1,31 @@
-import sys, re, string
-from math import ceil, floor, sqrt, pi, factorial, gcd, log, log10, log2, inf
-from copy import deepcopy
-from collections import Counter, deque, defaultdict
-from heapq import heapify, heappop, heappush
-from itertools import accumulate, product, combinations, combinations_with_replacement, permutations,groupby
-from bisect import bisect, bisect_left, bisect_right
-from functools import reduce
-from decimal import Decimal, getcontext
-import numpy
-
-N = int(input())
-cnt = 0
-
-for a in range(1,N+1):
-    for b in range(1,(N-a)+1):
-        if a*b >= N:
+# N の約数の個数をカウント
+def divisors(N):
+    num=0
+    for i in range(1,N+1):
+        if i*i>N:
             break
-        for c in range(1,N+1):
-            d = (N-a*b)//c
-            if 1 <= d <= N and a*b+c*d == N:
-                cnt += 1
+        if N%i!=0:
+            continue
 
-print(cnt)
+        num+=1
+        if N//i!=i:
+            num+=1
+
+    return num
+
+
+if __name__ =="__main__":
+    N=int(input())
+    # 約数の個数を管理
+    table=[0 for _ in range(N)]
+    for i in range(1,N):
+        table[i]=divisors(i)
+
+    ans=0
+    # AB の値を全探索
+    for i in range(1,N):
+        ab=i
+        cd=N-i
+        ans+=table[ab]*table[cd]
+
+    print(ans)
