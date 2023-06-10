@@ -37,20 +37,22 @@ for _ in range(M):
         uf.merge(u,v)
         
 K = int(input())
-uf2 = unionfind(N)
+D = set()
 for _ in range(K):
     x,y = map(int, input().split())
     x,y = x-1,y-1
-    if not uf.same(x,y):
-        uf2.merge(x,y)
+    a,b = uf.leader(x),uf.leader(y)
+    a,b = min(a,b),max(a,b)
+    D.add((a,b))
 
 Q = int(input())
 for _ in range(Q):
     p,q = map(int, input().split())
     p,q = p-1,q-1
-    print(p,q)
-    print(uf2.same(p,q))
-    if uf2.same(p,q):
+    a,b = uf.leader(p),uf.leader(q)
+    a,b = min(a,b),max(a,b)
+    
+    if (a,b) in D:
         print("No")
     else:
         print("Yes")
