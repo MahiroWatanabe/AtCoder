@@ -1,12 +1,26 @@
-import sys, re, string
-from math import ceil, floor, sqrt, pi, factorial, gcd, log, log10, log2, inf, cos, sin
-from copy import deepcopy, copy
-from collections import Counter, deque, defaultdict
-from heapq import heapify, heappop, heappush
-from itertools import accumulate, product, combinations, combinations_with_replacement, permutations,groupby
-from bisect import bisect, bisect_left, bisect_right
-from functools import reduce
-from decimal import Decimal, getcontext
+N,Q = map(int, input().split())
+A = [set() for _ in range(N)]
+ans = N
 
-A = [1,3,5,7,9]
-print(bisect_left(A,4))
+for _ in range(Q):
+    value,*_a = map(int, input().split())
+    if value == 1:
+        u,v = _a
+        u,v = u-1,v-1
+        if len(A[u]) == 0:
+            ans -= 1
+        if len(A[v]) == 0:
+            ans -= 1
+        A[u].add(v)
+        A[v].add(u)   
+    else:
+        v = _a[0]
+        v -= 1
+        if len(A[v]) != 0:
+            for to in A[v]:
+                A[to].discard(v)
+                if len(A[to]) == 0:
+                    ans += 1
+            A[v].clear()
+            ans += 1
+    print(ans)
