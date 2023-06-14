@@ -1,12 +1,13 @@
 N = int(input())
-left = 1
-right = N
-while right - left > 1:
-    mid = (left + right) // 2
-    print("?", mid)
-    S = input()
-    if S == "0":
-        left = mid
+L,R = 1,N
+
+while R-L > 1:
+    mid = (L+R)//2
+    print("?",mid)
+    v = int(input())
+    if v == 0:
+        L = mid
     else:
-        right = mid
-print("!", left)
+        R = mid
+        
+print("!",str(L))
