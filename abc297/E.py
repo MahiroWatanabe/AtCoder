@@ -10,11 +10,13 @@ from decimal import Decimal, getcontext
 
 N,K = map(int, input().split())
 A = list(map(int,input().split()))
-D = [i for i in A]
+D = []
 S = set()
-for i in A:
-    S.add(i)
 heapify(D)
+for i in A:
+    if i not in S:
+        heappush(D,i)
+        S.add(i)
 
 for i in range(K-1):
     v = heappop(D)
