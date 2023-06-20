@@ -1,31 +1,26 @@
-# N の約数の個数をカウント
-def divisors(N):
-    num=0
-    for i in range(1,N+1):
-        if i*i>N:
+'リスト形式で約数を全部表示'
+def calc_divisors(N):
+    res = []
+
+    for i in range(1, N + 1):
+        if i * i > N:
             break
-        if N%i!=0:
+        
+        if N % i != 0:
             continue
 
-        num+=1
-        if N//i!=i:
-            num+=1
+        res.append(i)
 
-    return num
+        if N // i != i:
+            res.append(N // i)
 
+    res.sort()
+    return res
 
-if __name__ =="__main__":
-    N=int(input())
-    # 約数の個数を管理
-    table=[0 for _ in range(N)]
-    for i in range(1,N):
-        table[i]=divisors(i)
+N = int(input())
+ans = 0
 
-    ans=0
-    # AB の値を全探索
-    for i in range(1,N):
-        ab=i
-        cd=N-i
-        ans+=table[ab]*table[cd]
-
-    print(ans)
+for i in range(1,N):
+    ans += len(calc_divisors(i))*len(calc_divisors(N-i))
+    
+print(ans)

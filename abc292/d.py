@@ -1,60 +1,56 @@
+import sys, re, string
+from math import ceil, floor, sqrt, pi, factorial, gcd, log, log10, log2, inf, cos, sin
+from copy import deepcopy, copy
+from collections import Counter, deque, defaultdict
+from heapq import heapify, heappop, heappush
+from itertools import accumulate, product, combinations, combinations_with_replacement, permutations,groupby
+from bisect import bisect, bisect_left, bisect_right, insort_left, insort_right
+from functools import reduce
+from decimal import Decimal, getcontext
+
 class unionfind:
-    def __init__(self,n):
-        self.n = n
-        self.par = [-1]*(n+1)
-        self.size = [1]*(n+1)
+    def __init__(self, n):
+        self.n=n
+        self.parent_size=[-1]*n
+        
+    def merge(self, a, b):
+        x, y=self.leader(a), self.leader(b)
+        if x == y: return
+        if abs(self.parent_size[x])<abs(self.parent_size[y]): x, y=y, x
+        self.parent_size[x] += self.parent_size[y]
+        self.parent_size[y]=x
+        return
     
-    def root(self,x):
-        while self.par[x] != -1:
-            x = self.par[x]
-        return x
+    def same(self, a, b):
+        return self.leader(a) == self.leader(b)
     
-    def unit(self,u,v):
-        rootu = self.root(u)
-        rootv = self.root(v)
-        if rootu != rootv:
-            if self.size[rootu] < self.size[rootv]:
-                self.par[rootu] = rootv
-                self.size[rootv] += self.size[rootu]
-            else:
-                self.par[rootv] = rootu
-                self.size[rootu] += self.size[rootv]
+    def leader(self, a):
+        if self.parent_size[a]<0: return a
+        self.parent_size[a]=self.leader(self.parent_size[a])
+        return self.parent_size[a]
     
-    def same(self,u,v):
-        return self.root(u) == self.root(v)
+    def size(self, a):
+        return abs(self.parent_size[self.leader(a)])
+    
+    def groups(self):
+        result=[[] for _ in range(self.n)]
+        for i in range(self.n):
+            result[self.leader(i)].append(i)
+        return [r for r in result if r != []]
     
 N,M = map(int, input().split())
-into_num = [0]*N
-R = [[0,set()] for _ in range(N)]
-
 uf = unionfind(N)
-UV = []
-
-if M == 0:
-    print("No")
-    exit()
-    
+D = defaultdict(int)
 for _ in range(M):
     u,v = map(int, input().split())
     u,v = u-1,v-1
-    UV.append([u,v])
-    into_num[u] += 1
-    into_num[v] += 1
-    uf.unit(u,v)
-
-for i in range(len(UV)):
-    u,v = UV[i]
-    G = uf.root(u)
-    if not u in R[G][1]:
-        R[G][0] += into_num[u]
-        R[G][1].add(u)
-    
-    if not v in R[G][1]:
-        R[G][0] += into_num[v]
-        R[G][1].add(v)
+    uf.merge(u,v)
+    D[uf.leader(u)] += 1
 
 for i in range(N):
-    if R[i][0]//2 != len(R[i][1]):
+    v = uf.leader(i)
+    if uf.size(v) != D[v]:
         print("No")
         exit()
+
 print("Yes")
