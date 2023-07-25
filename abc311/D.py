@@ -7,42 +7,43 @@ from itertools import accumulate, product, combinations, combinations_with_repla
 from bisect import bisect, bisect_left, bisect_right, insort_left, insort_right
 from functools import reduce, cmp_to_key
 from decimal import Decimal, getcontext
-sys.setrecursionlimit(10**7)
-
 
 N,M = map(int, input().split())
 S = [input() for _ in range(N)]
-
-ans = [[False for _ in range(M)] for _ in range(N)]
-ans[1][1] = True
-
-A = set()
-XY = [[1,0],[-1,0],[0,1],[0,-1]]
 Que = deque()
 Que.append([1,1])
-A.add((1,1))
+ans = [[False for _ in range(M)] for _ in range(N)]
+D = set()
+D.add((1,1))
+ans[1][1] = True
+XY = [[1,0],[-1,0],[0,1],[0,-1]]
 
 while Que:
     x,y = Que.popleft()
+    
     for dx,dy in XY:
         nx,ny = copy(x),copy(y)
         while True:
             nx += dx
             ny += dy
+            
             if S[nx][ny] == ".":
                 ans[nx][ny] = True
             else:
                 nx -= dx
                 ny -= dy
-                if (nx,ny) not in A:
-                    A.add((nx,ny))
+                
+                if (nx,ny) not in D:
+                    D.add((nx,ny))
                     Que.append([nx,ny])
+                    
                 break
+                    
 cnt = 0
-    
-for i in range(N):
-    for j in range(M):
-        if not(i == 0 or i == N-1 or j == 0 or j == M-1) and ans[i][j] == True:
+
+for i in ans:
+    for j in i:
+        if j:
             cnt += 1
 
 print(cnt)
