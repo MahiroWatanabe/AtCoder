@@ -1,0 +1,3 @@
+S = input()
+
+print("Yes" if S == "ACE" or S == "BDF" or S == "CEG" or S == "DFA" or S == "EGB" or S == "FAC" or S == "GBD" else "No")
