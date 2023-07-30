@@ -13,9 +13,9 @@ while R-L > 1:
     for i in range(M):
         if B[i] >= mid:
             nb += 1
-    if na >= nb:
-        R = mid
-    else:
+    if na < nb:
         L = mid
+    else:
+        R = mid
 
 print(R)
