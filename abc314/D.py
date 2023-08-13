@@ -32,7 +32,6 @@ S = list(S)
 
 for i in range(max(a,b)+1,Q):
     t, x, c = operations[i]
-    if t == 1:
-        S[x-1] = c
+    S[x-1] = c
     
 print("".join(S))
