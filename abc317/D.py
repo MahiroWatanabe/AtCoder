@@ -1,4 +1,4 @@
-# dp問題　すでに議席を書くときしている時の遷移を含む必要ある
+# dp問題　すでに議席を獲得している時の遷移を含む必要ある
 N = int(input())
 XYZ = [list(map(int, input().split())) for _ in range(N)]
 Taka,Aoki = 0,0
