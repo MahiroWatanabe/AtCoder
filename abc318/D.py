@@ -1,3 +1,4 @@
+# 重み付き無向完全グラフdfs
 import sys, re, string
 from math import ceil, floor, sqrt, pi, factorial, gcd, log, log10, log2, inf, cos, sin
 from copy import deepcopy, copy
