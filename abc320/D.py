@@ -1,6 +1,7 @@
 # bfs　グラフに変換する問題　
 # 特殊な部分はダイクストラ法のように辺に重り（dx,dy）があること
 # （dx,dy）をdefaultdictで持つことで、O(1)で参照できる
+# X→Yの（dx,dy）がわかるなら、逆のY→Xは（-dx,-dy）でわかる
 
 import sys, re, string
 from math import ceil, floor, sqrt, pi, factorial, gcd, log, log10, log2, inf, cos, sin
