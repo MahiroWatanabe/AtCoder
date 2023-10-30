@@ -1,3 +1,5 @@
+# 式で表すと共通項をあぶり出せる→共通項により計算量を短縮
+# 二分探索と累積わ
 import sys, re, string
 from math import ceil, floor, sqrt, pi, factorial, gcd, log, log10, log2, inf, cos, sin
 from copy import deepcopy, copy
@@ -17,7 +19,6 @@ ans = 0
 for i in range(N):
     v = P-A[i]
     v_index = bisect_right(B,v)
-    v1_index = bisect_left(B,v)
     ans += (M-v_index)*P
     ans += C[v_index]+v_index*A[i]
 print(ans)
