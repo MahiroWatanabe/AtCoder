@@ -1,5 +1,6 @@
 # 文字列回転　実装が難しい
 # オフセット使った考え
+# 平行移動
 
 import sys, re, string
 from math import ceil, floor, sqrt, pi, factorial, gcd, log, log10, log2, inf, cos, sin
