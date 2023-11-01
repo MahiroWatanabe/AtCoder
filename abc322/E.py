@@ -18,25 +18,27 @@ from functools import reduce, cmp_to_key
 from decimal import Decimal, getcontext
 
 N, K, P = map(int, input().split())
-D = {tuple([0] * K): 0}
+C = [list(map(int, input().split())) for _ in range(N)]
+D = {tuple([0 for _ in range(K)]): 0}
 
 for i in range(N):
-    C = list(map(int, input().split()))
-    c = C[0]
-    a = C[1:]
+    cost, a = C[i][0], C[i][1:]
     old = deepcopy(D)
-    for val, key in old.items():
-        val = list(val)
-        for j in range(K):
-            val[j] = min(val[j] + a[j], P)
-        val = tuple(val)
-        if val in D:
-            D[val] = min(D[val], key + c)
-        else:
-            D[val] = key + c
 
-T = [P for _ in range(K)]
-if tuple(T) in D:
-    print(D[tuple(T)])
+    for key, val in old.items():
+        key = list(key)
+        for j in range(K):
+            key[j] = min(key[j] + a[j], P)
+        key = tuple(key)
+
+        if key in D:
+            D[key] = min(D[key], val + cost)
+        else:
+            D[key] = val + cost
+
+ans = tuple([P for _ in range(K)])
+
+if ans in D:
+    print(D[ans])
 else:
     print(-1)

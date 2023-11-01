@@ -17,26 +17,26 @@ from decimal import Decimal, getcontext
 
 N, K, P = map(int, input().split())
 C = [list(map(int, input().split())) for _ in range(N)]
-D = {tuple(0 for _ in range(K)): 0}
+D = {tuple([0 for _ in range(K)]): 0}
 
 for i in range(N):
-    c, a = C[i][0], C[i][1:]
+    cost, a = C[i][0], C[i][1:]
     old = deepcopy(D)
 
-    for key, value in old.items():
+    for key, val in old.items():
         key = list(key)
         for j in range(K):
             key[j] = min(key[j] + a[j], P)
         key = tuple(key)
 
         if key in D:
-            D[key] = min(D[key], value + c)
+            D[key] = min(D[key], val + cost)
         else:
-            D[key] = value + c
+            D[key] = val + cost
 
-exa = tuple(P for _ in range(K))
+ans = tuple([P for _ in range(K)])
 
-if exa in D:
-    print(D[exa])
+if ans in D:
+    print(D[ans])
 else:
     print(-1)
