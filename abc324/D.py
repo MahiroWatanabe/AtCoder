@@ -1,4 +1,7 @@
 # 全探索が無理なら、答えを探索する
+# 何を全探索するのかを考える
+# 先頭に0をつけるにはつけたい文字列.zfill(調整したい長さ)で可能
+# 今回だとv_s.zfill(N)
 import sys, re, string
 from math import ceil, floor, sqrt, pi, factorial, gcd, log, log10, log2, inf, cos, sin
 from copy import deepcopy, copy
