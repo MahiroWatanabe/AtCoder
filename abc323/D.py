@@ -1,3 +1,7 @@
+# スライム実装問題
+# heapqとdict
+# 小さい数字から実装していくので、heapqが適している
+# 配列だと10**9の値を持つことができないので、dictで持つ必要がある
 import sys, re, string
 from math import ceil, floor, sqrt, pi, factorial, gcd, log, log10, log2, inf, cos, sin
 from copy import deepcopy, copy
@@ -16,19 +20,21 @@ from functools import reduce, cmp_to_key
 from decimal import Decimal, getcontext
 
 N = int(input())
-SC = sorted([list(map(int, input().split())) for _ in range(N)])
 D = defaultdict(int)
-for i in range(N):
-    D[SC[i][0]] = SC[i][1]
-index = 0
+Q = []
+heapify(Q)
+for _ in range(N):
+    S, C = map(int, input().split())
+    D[S] = C
+    heappush(Q, S)
 
-while len(SC) != index:
-    print(SC[index])
-    D[SC[index][0] * 2] += SC[index][1] // 2
-    D[SC[index][0]] -= SC[index][1] // 2 * 2
-    index += 1
-    print(D)
-
+while Q:
+    v = heappop(Q)
+    x, y = D[v] // 2, D[v] % 2
+    if x >= 1:
+        heappush(Q, v * 2)
+    D[v * 2] += x
+    D[v] = y
 cnt = 0
 for i, j in D.items():
     cnt += j
