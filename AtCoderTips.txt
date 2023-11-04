@@ -4,3 +4,6 @@
 
 ・i,j,kなどの三つ組みを考える時
     真ん中の値に注目して考える
+
+・sortedset
+https://github.com/tatyam-prime/SortedSet
