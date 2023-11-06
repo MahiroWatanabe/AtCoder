@@ -8,11 +8,14 @@ def toDelete(x):
             k += 1
     return tot >= 2 and k == 1
 
+
+# この部分で-1することによって、abc順に削除できる
 def del_cookie(i, j):
     if row_deleted[i] or col_deleted[j]:
         return
     row[i][a[i][j]] -= 1
     col[j][a[i][j]] -= 1
+
 
 h, w = map(int, input().split())
 c = [input() for _ in range(h)]
@@ -21,7 +24,7 @@ a = [[0] * w for _ in range(h)]
 
 for i in range(h):
     for j in range(w):
-        a[i][j] = ord(c[i][j]) - ord('a')
+        a[i][j] = ord(c[i][j]) - ord("a")
 
 m = 26
 row = [[0] * m for _ in range(h)]
@@ -69,6 +72,5 @@ for i in range(h):
     for j in range(w):
         if not row_deleted[i] and not col_deleted[j]:
             ans += 1
-print(row_deleted)
-print(col_deleted)
+
 print(ans)
