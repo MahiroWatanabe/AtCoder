@@ -1,3 +1,5 @@
+# ある範囲からある範囲の数を N個使用して、特定の値を再現できるか
+# AN <= target <= BNで求められる
 A, B, W = map(int, input().split())
 W_g = W * 1000
 min_ans = 10**15
