@@ -1,3 +1,6 @@
+# 変化する値を考えることが大事
+# 操作を行った時に変わるのは、投票が増えた人と今までで一番の人だけ
+
 N, M = map(int, input().split())
 A = list(map(int, input().split()))
 D = [0 for _ in range(N)]
@@ -12,5 +15,4 @@ for i in range(M):
     if current == D[A[i] - 1]:
         index = min(index, A[i] - 1)
 
-    # print(D)
     print(index + 1)

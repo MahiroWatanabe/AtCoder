@@ -1,3 +1,9 @@
+# ランレングス圧縮の考え
+# アルファベット一文字という制限に目をつける
+# aaaが存在するのならa,aaも存在する（包含）
+# 部分文字列：今回の問題のような前後から一定の区間を削除した（連続している）
+# 部分列：文字列から順番通りに連続しない文字列
+
 import sys, re, string
 from math import ceil, floor, sqrt, pi, factorial, gcd, log, log10, log2, inf, cos, sin
 from copy import deepcopy, copy
